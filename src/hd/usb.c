@@ -963,6 +963,9 @@ void get_serial_devs(hd_data_t *hd_data)
           }
         }
       }
+
+      bus_name = free_mem(bus_name);
+      sf_drv_name = free_mem(sf_drv_name);
     }
 
     sf_dev = free_mem(sf_dev);

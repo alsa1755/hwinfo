@@ -406,6 +406,13 @@ void get_input_devices(hd_data_t *hd_data)
     }
   }
 
+  // Free any remaining allocated strings from the last device
+  name = free_mem(name);
+  handlers = free_mem(handlers);
+  key = free_mem(key);
+  rel = free_mem(rel);
+  abso = free_mem(abso);
+
   free_str_list(input);
 
 }

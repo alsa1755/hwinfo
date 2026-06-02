@@ -1011,7 +1011,10 @@ API_SYM hd_data_t *hd_free_hd_data(hd_data_t *hd_data)
   }
   hd_data->modinfo = free_mem(hd_data->modinfo);
   if((p = hd_data->modinfo_ext)) {
-    for(; p->type; p++) free_mem(p->module);
+    for(; p->type; p++) {
+      free_mem(p->module);
+      free_mem(p->alias);
+    }
   }
   hd_data->modinfo_ext = free_mem(hd_data->modinfo_ext);
 
@@ -5994,6 +5997,8 @@ void hd_sysfs_driver_list(hd_data_t *hd_data)
         str_printf(&sf->driver, 0, "nvme_%s", transport);
         sf->device = new_str(hd_sysfs_id(sf_dev));
         ADD2LOG("%16s: %s\n", sf->driver, sf->device);
+
+        free_mem(transport);
       }
     }
 
