@@ -1577,6 +1577,8 @@ void hd_read_xen(hd_data_t *hd_data)
       if(s) add_str_list(&hd->drivers, s);
     }
 
+    free_mem(xen_type);
+    free_mem(xen_node);
     free_mem(sf_dev);
     free_mem(drv);
     free_mem(module);
